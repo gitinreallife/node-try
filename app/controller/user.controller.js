@@ -1,8 +1,41 @@
+const Bluebird = require('bluebird')
+const Util = require('util')
+const Base = require('./_base.controller.js')
 
-const setModel = "user"
-_base = require('./_base.controller.js')(setModel)
-const db = _base.db, Op = _base.Op, User = _base.Model
-module.exports = exports = _base
+class User extends Base{
+    findAll(req, res, next){
+        console.log('thissssssssss')
+        console.log(this)
+        res.send(this.getAllConstructor())
+    }
+}
+// Util.inherits(User, Base)
+module.exports = User
+
+// // FETCH all objects or filter
+// User.prototype.findAll = (req, res, next) => {
+//     // conditions haven't been tested yet
+//     var conditions = {}
+//     for(var param in req.query){
+//         if (req.query.hasOwnProperty(param) && req.query[param] != '' ) {
+//             conditions[param] = {
+//                 [Op.like]: `%${req.query[param]}%`
+//             }
+//         }
+//     }
+//     var filters = Object.keys(conditions).length > 0 ? {where: conditions} : {}
+
+//     User.findAll(filters).then(objects => {
+//         //send all objects to the client
+//         res.send(objects)
+//     }).catch(err => {
+//          res.status(500).send({
+//             message: err.message || "Some error occurred."
+//         })
+//     })
+// }
+
+
 
 
 //FETCH by email
@@ -61,28 +94,4 @@ exports.findListByStatus = (req, res) => {
     })
 }
 
-
-
-// // FETCH all objects or filter
-// exports.findAll = (req, res, next) => {
-//     // conditions haven't been tested yet
-//     var conditions = {}
-//     for(var param in req.query){
-//         if (req.query.hasOwnProperty(param) && req.query[param] != '' ) {
-//             conditions[param] = {
-//                 [Op.like]: `%${req.query[param]}%`
-//             }
-//         }
-//     }
-//     var filters = Object.keys(conditions).length > 0 ? {where: conditions} : {}
-
-//     User.findAll(filters).then(objects => {
-//         //send all objects to the client
-//         res.send(objects)
-//     }).catch(err => {
-//          res.status(500).send({
-//             message: err.message || "Some error occurred."
-//         })
-//     })
-// }
 
